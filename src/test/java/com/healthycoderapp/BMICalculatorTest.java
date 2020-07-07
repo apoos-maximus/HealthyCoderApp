@@ -1,6 +1,6 @@
 package com.healthycoderapp;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.junit.jupiter.api.function.Executable;
 
 import java.util.ArrayList;
@@ -8,10 +8,10 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class BMICalculatorTest {
+public class BMICalculatorTest {
 
     @Test
-    void should_return_true() {
+    public void should_return_true() {
         //given
         double weight = 89.0;
         double height = 1.72;
@@ -24,7 +24,7 @@ class BMICalculatorTest {
     }
 
     @Test
-    void should_return_false() {
+    public void should_return_false() {
         //given
         double weight = 50.0;
         double height = 1.92;
@@ -37,7 +37,7 @@ class BMICalculatorTest {
     }
 
     @Test
-    void should_throwArithmaticException_when_height_zero ()
+    public void should_throwArithmaticException_when_height_zero ()
     {
         //given
         double weight = 50.0;
@@ -51,7 +51,7 @@ class BMICalculatorTest {
     }
 
     @Test
-    void should_return_coder_with_worst_BMI_whenCoderListNotEmpty() {
+    public void should_return_coder_with_worst_BMI_whenCoderListNotEmpty() {
         //given
         List<Coder> coders = new ArrayList<>();
         coders.add(new Coder(1.80, 60.0));
@@ -63,13 +63,13 @@ class BMICalculatorTest {
 
         //then
         assertAll(
-            () -> assertEquals(1.82, coderWorstBMI.getHeight()),
-            () -> assertEquals(98.0, coderWorstBMI.getWeight())
+                () -> assertEquals(1.82, coderWorstBMI.getHeight()),
+                () -> assertEquals(98.0, coderWorstBMI.getWeight())
         );
     }
 
     @Test
-    void should_ReturnNullWorstBMICoder_when_CoderListEmpty() {
+    public void should_ReturnNullWorstBMICoder_when_CoderListEmpty() {
         //given
         List<Coder> coders = new ArrayList<>();
 
@@ -79,4 +79,5 @@ class BMICalculatorTest {
         //then
         assertNull(coderWorstBMI);
     }
+
 }
