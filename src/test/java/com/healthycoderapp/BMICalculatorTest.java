@@ -2,19 +2,28 @@ package com.healthycoderapp;
 
 import org.junit.Test;
 import org.junit.jupiter.api.function.Executable;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 public class BMICalculatorTest {
 
-    @Test
-    public void should_return_true() {
+    private String environment = "prod";
+
+    @ParameterizedTest (name = "weight={0}, height={1}")
+    @CsvFileSource(resources = "/values.csv", numLinesToSkip = 1)
+    public void should_return_true(Double coderWeight, Double coderHeight) {
         //given
-        double weight = 89.0;
-        double height = 1.72;
+        double weight = coderWeight;
+        double height = coderHeight;
 
         //when
         boolean recommended = BMICalculator.isDietRecommended(weight, height);
@@ -69,6 +78,23 @@ public class BMICalculatorTest {
     }
 
     @Test
+    public void should_return_coder_with_worst_BMI_whenCoder1MsListNotEmptywithin10000ele() {
+
+        //given
+        assumeTrue(this.environment.equals("prod"));
+        List<Coder> coders = new ArrayList<>();
+        for (int i=0; i < 10000; i++) {
+            coders.add(new Coder(1.0 + i, 10.0 + i));
+        }
+
+        //when
+        Executable executable = () -> BMICalculator.findCoderWithWorstBMI(coders);
+
+        //then
+        assertTimeout(Duration.ofMillis(13), executable);
+    }
+
+    @Test
     public void should_ReturnNullWorstBMICoder_when_CoderListEmpty() {
         //given
         List<Coder> coders = new ArrayList<>();
@@ -96,5 +122,4 @@ public class BMICalculatorTest {
         //then
         assertArrayEquals(expected, bmiScores);
     }
-
 }
