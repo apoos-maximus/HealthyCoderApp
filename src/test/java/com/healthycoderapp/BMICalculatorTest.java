@@ -1,5 +1,7 @@
 package com.healthycoderapp;
 
+import com.healthycoderapp.Exceptions.NegativeValueException;
+import com.healthycoderapp.Exceptions.ZeroValueException;
 import org.junit.Test;
 import org.junit.jupiter.api.function.Executable;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -60,7 +62,7 @@ public class BMICalculatorTest {
     }
 
     @Test
-    public void should_return_coder_with_worst_BMI_whenCoderListNotEmpty() {
+    public void should_return_coder_with_worst_BMI_whenCoderListNotEmpty() throws ZeroValueException, NegativeValueException {
         //given
         List<Coder> coders = new ArrayList<>();
         coders.add(new Coder(1.80, 60.0));
@@ -78,7 +80,7 @@ public class BMICalculatorTest {
     }
 
     @Test
-    public void should_return_coder_with_worst_BMI_whenCoder1MsListNotEmptywithin10000ele() {
+    public void should_return_coder_with_worst_BMI_whenCoder1MsListNotEmptywithin10000ele() throws ZeroValueException, NegativeValueException {
 
         //given
         assumeTrue(this.environment.equals("prod"));
@@ -107,7 +109,7 @@ public class BMICalculatorTest {
     }
 
     @Test
-    public void should_ReturnCorrectBMIScoreArray_When_CoderListNotEmpty() {
+    public void should_ReturnCorrectBMIScoreArray_When_CoderListNotEmpty() throws ZeroValueException, NegativeValueException {
 
         //given
         List<Coder> coders = new ArrayList<> ();

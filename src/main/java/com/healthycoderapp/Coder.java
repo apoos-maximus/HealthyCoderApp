@@ -1,5 +1,8 @@
 package com.healthycoderapp;
 
+import com.healthycoderapp.Exceptions.NegativeValueException;
+import com.healthycoderapp.Exceptions.ZeroValueException;
+
 public class Coder {
 	
 	private double height;
@@ -7,8 +10,20 @@ public class Coder {
 	private int age;
 	private Gender gender;
 		
-	public Coder(double height, double weight) {
+	public Coder(double height, double weight) throws NegativeValueException, ZeroValueException {
 		super();
+		if (height < 0) {
+			throw new NegativeValueException("height");
+		}
+		if (weight < 0) {
+			throw new NegativeValueException("weight");
+		}
+		if (height == 0) {
+			throw new ZeroValueException("height");
+		}
+		if (weight == 0) {
+			throw new ZeroValueException("height");
+		}
 		this.height = height;
 		this.weight = weight;
 	}
