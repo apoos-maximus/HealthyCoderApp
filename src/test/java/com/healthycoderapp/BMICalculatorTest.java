@@ -20,9 +20,10 @@ public class BMICalculatorTest {
 
     private String environment = "prod";
 
+    //test for healthy coders
     @ParameterizedTest (name = "weight={0}, height={1}")
     @CsvFileSource(resources = "/values.csv", numLinesToSkip = 1)
-    public void should_return_true(Double coderWeight, Double coderHeight) {
+    public void should_return_true(Double coderWeight, Double coderHeight, Boolean bmiStatus) {
         //given
         double weight = coderWeight;
         double height = coderHeight;
@@ -31,20 +32,7 @@ public class BMICalculatorTest {
         boolean recommended = BMICalculator.isDietRecommended(weight, height);
 
         //then
-        assertTrue(recommended);
-    }
-
-    @Test
-    public void should_return_false() {
-        //given
-        double weight = 50.0;
-        double height = 1.92;
-
-        //when
-        boolean recommended = BMICalculator.isDietRecommended(weight, height);
-
-        //then
-        assertFalse(recommended);
+        assertEquals(bmiStatus,recommended);
     }
 
     @Test
